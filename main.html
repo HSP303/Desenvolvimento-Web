@@ -3,38 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Aula01_Desenvolvimento_Web</title>
 </head>
 <body>
-    <header>
-        
-    </header>
-    <main>
-        <form action="">
-            <label for="name"></label>
-            <input name="name" type="text"> 
 
-            <label for="tel"></label>
-            <input name="tel" type="tel">
-
-            <label for="email"></label>
-            <input name="email" type="email">
-
-            <label for="tip_pessoa"></label>
-            <input name="tip_pessoa" type="text">
-
-            <label for="endereco"></label>
-            <input name="endereco" type="text">
-
-            <label for="uf"></label>
-            <input name="uf" type="text">
- 
-        </form>
- 
-    </main>
-    <footer>
-
-    </footer>
+    <div>
+        <h1 id="titulo">Cadastro</h1>
+    </div>
     
+    <fieldset class="grupo">
+        <div class="campo">
+            <label for="nome"><strong>Nome</strong></label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <div class="campo">
+            <label for="sobrenome"><strong>Sobrenome</strong></label>
+            <input type="text" name="sobrenome" id="sobrenome" required>
+        </div>
+    </fieldset>
+
+    <div class="campo">
+        <label for="telefone"><strong>Telefone</strong></label>
+        <input type="tel" name="telefone" id="telefone">
+    </div>
+    <div class="campo">
+        <label for="email"><strong>Email</strong></label>
+        <input type="email" name="email" id="email">
+    </div>
+
+    <div class="campo">
+        <label><strong>Tipo Pessoa</strong></label>
+        <label>
+            <input type="radio" name="tip_pessoa" value="fisica">Física
+        </label>
+        <label>
+            <input type="radio" name="tip_pessoa" value="juridica">Juridica
+        </label>
+    </div>
+    
+    <div class="campo">
+        <label for="endereco"><strong>Endereço</strong></label>
+        <input type="text" name="endereco" id="endereco">
+    </div>
+
+    <div class="campo">
+        <label for="uf"><strong>Estado</strong></label>
+        <select name="uf" id="uf">
+            <option selected value="">Selecione</option>
+            <option>Santa Catarina</option>
+            <option>Rio Grande do Sul</option>
+            <option>Parana</option>
+            <option>Minas Gerais</option>
+            <option>São Paulo</option>
+            <option>Rio de Janeiro</option>
+            <option>Mato Grosso</option>
+        </select>
+    </div>
+
+    <div id="botao">
+        <input type="submit" value="Concluído">
+    </div>
+
+
 </body>
 </html>

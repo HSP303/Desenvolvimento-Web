@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;    
+}
+
+#titulo{
+    margin-left: 7%;
+}
+
+fieldset{
+    border: 0;
+}
+
+body{
+    font-size: 1em;
+    margin-left: 36%;
+    margin-top: 2%;
+    justify-content: center;
+}
+
+input, select, button{
+    border-radius: 5px;
+}
+
+.campo{
+    margin-bottom: 1em;
+}
+
+.campo label{
+    margin-bottom: 0.2em;
+    display: block;
+}
+
+fieldset.grupo .campo{
+    float: left;
+    margin-left: 1em;
+}
+
+.campo input[type="text"], input[type="email"], input[type="tel"], select{
+    padding: 0.2em;
+    border: solid 1px;
+    box-shadow: 2px, 2px, 2px rgba(0,0,0,0.2);
+    display: block;
+}
+
+.botao{
+    border: 0;
+    font-size: 1.2em;
+    margin-bottom: 1em;
+    padding: 0.2em 0.6em;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    position: absolute;
+    top: 90%;
+    left: 50%;
+}
