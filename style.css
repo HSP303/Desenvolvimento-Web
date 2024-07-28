@@ -4,7 +4,7 @@
 }
 
 #titulo{
-    margin-left: 7%;
+    margin-left: 10%;
 }
 
 fieldset{
@@ -13,7 +13,7 @@ fieldset{
 
 body{
     font-size: 1em;
-    margin-left: 36%;
+    margin-left: 40.5%;
     margin-top: 2%;
     justify-content: center;
 }
@@ -33,7 +33,7 @@ input, select, button{
 
 fieldset.grupo .campo{
     float: left;
-    margin-left: 1em;
+    margin-top: 1em;
 }
 
 .campo input[type="text"], input[type="email"], input[type="tel"], select{
@@ -43,7 +43,7 @@ fieldset.grupo .campo{
     display: block;
 }
 
-.botao{
+#botao{
     border: 0;
     font-size: 1.2em;
     margin-bottom: 1em;
@@ -51,6 +51,29 @@ fieldset.grupo .campo{
     box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     position: absolute;
-    top: 90%;
+    top: 50%;
     left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.botao{
+    border: 0;
+    font-size: 1.1em;
+    margin-bottom: 1em;
+    padding: 0.2em 0.6em;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.botao:target{
+    padding: 0.1em 0.5em
+}
+
+.botao, select{
+    cursor: pointer;
 }
