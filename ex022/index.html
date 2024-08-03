@@ -10,28 +10,172 @@
         <h1>
             Pedro Henrique Scheidt
         </h1>
-        <a href="https://github.com/sqlmapproject/sqlmap">SQLMAP</a>
+    
+        
     </header>
     <main>
-        <h2>Biografia</h2>
-        <p><strong>Currently</strong>, I am part of the Soeltech team, where I serve as an ERP Support specialist. In this role, I am responsible for providing specialized technical support to clients, ensuring their needs are met effectively and efficiently.
-    
-            With an intermediate level of <em>English</em>, I am able to communicate clearly and precisely in an international professional environment. <br><br>
-            
-            <B>Additionally</B>, I have basic knowledge in the field of <i>cybersecurity</i>, a constantly evolving field vital for ensuring the integrity and security of information systems.
-            
-            Currently, I am pursuing the 3rd phase of my undergraduate studies in Information Systems, where I have the opportunity to deepen my knowledge in information technology and develop practical skills to tackle the challenges of this ever-changing sector.
-            
-            I am committed to continually seeking opportunities for learning and professional growth to become a standout professional in the field of information technology.</p>   
-    
-         <img src="perfill.jpg" alt="Imagem de Perfil" height="500px" >
-    
-         <br>
-    
-         <audio controls>
-            <source src="Batman_Theme.mp3" type="audio/mp3">
-            Não foi possível carregar!!!
-         </audio>
+        <section>
+            <h2>Biografia</h2>
+            <p><strong>Currently</strong>, I am part of the Soeltech team, where I serve as an ERP Support specialist. In this role, I am responsible for providing specialized technical support to clients, ensuring their needs are met effectively and efficiently.
+        
+                With an intermediate level of <em>English</em>, I am able to communicate clearly and precisely in an international professional environment. <br><br>
+                
+                <B>Additionally</B>, I have basic knowledge in the field of <i>cybersecurity</i>, a constantly evolving field vital for ensuring the integrity and security of information systems.
+                
+                Currently, I am pursuing the 3rd phase of my undergraduate studies in Information Systems, where I have the opportunity to deepen my knowledge in information technology and develop practical skills to tackle the challenges of this ever-changing sector.
+                
+                I am committed to continually seeking opportunities for learning and professional growth to become a standout professional in the field of information technology.</p>   
+        
+             <img src="perfill.jpg" alt="Imagem de Perfil" height="500px" >
+        
+             <br>
+        
+             <audio controls>
+                <source src="Batman_Theme.mp3" type="audio/mp3">
+                Não foi possível carregar!!!
+             </audio>
+        </section>
+
+         <section>
+            <nav>
+                <h3>Ferramentas</h3>
+                <li>
+                    <a href="https://github.com/sqlmapproject/sqlmap">SQLMAP</a>
+                </li>
+                <li>
+                    <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md">Reverse Shell</a>
+                </li>
+            </nav>
+         </section>
+         <section>
+            <h3>Código em Python</h3>
+            <pre>
+                from flask import Flask, request, render_template, redirect, url_for, jsonify, make_response
+from flask_sqlalchemy import SQLAlchemy
+app = Flask(__name__)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///db.sqlite3'
+db = SQLAlchemy(app)
+
+
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String())
+    author = db.Column(db.String())
+    content = db.Column(db.String())
+
+    def to_dict(self):
+        result = {}
+        for key in self.__mapper__.c.keys():
+            if getattr(self, key) is not None:
+                result[key] = str(getattr(self, key))
+            else:
+                result[key] = getattr(self, key)
+        return result
+@app.route('/')
+def home():
+    posts = Post.query.all()
+    return render_template('index.html', posts=posts)
+
+@app.route('/test')
+def teste():
+    nome = request.args.get("nome")
+    response = make_response('Hello {}'.format(nome))
+    response.set_cookie('info', 'Login session', httponly=True)
+    return response
+
+@app.route('/post/add', methods=['POST', 'GET'])
+def add_post():
+    try:
+        form = request.form
+        post = Post(title=form['title'], author=form['author'], content=form['content'])
+        db.session.add(post)
+        db.session.commit()
+    except Exception as e:
+        print(e)
+    return redirect(url_for('home'))
+
+
+@app.route('/post/<id>/del', methods=['POST', 'GET'])
+def delete_post(id):
+    try:
+        post = Post.query.get(id)
+        db.session.delete(post)
+        db.session.commit()
+    except Exception as e:
+        print(e)
+    return redirect(url_for('home'))
+
+@app.route('/post/<id>/edit', methods=['POST', 'GET'])
+def edit_post(id):
+    if request.method == 'POST':
+        try:
+            post = Post.query.get(id)
+            form = request.form
+            post.content = form['content']
+            db.session.commit()
+        except Exception as e:
+            print(e)
+        return redirect(url_for('home'))
+    else:
+        post = Post.query.get(id)
+        return render_template('edit.html', post=post)
+
+@app.route('/api/posts')
+def api_list_posts():
+    posts = Post.query.all()
+    return jsonify([post.to_dict() for post in posts])
+
+@app.route('/api/post', methods=['PUT'])
+def api_add_post():
+    try:
+        data = request.get_json()
+        post = Post(title=data['title'], author=data['author'], content=data['content'])
+        db.session.add(post)
+        db.session.commit()
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False})
+
+
+@app.route('/api/post/<id>', methods=['DELETE'])
+def api_delete_post(id):
+    try:
+        post = Post.query.get(id)
+        db.session.delete(post)
+        db.session.commit()
+        return jsonify({"success": True})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False})
+
+@app.route('/api/post/<id>', methods=['POST'])
+def api_edit_post(id):
+    try:
+        post = Post.query.get(id)
+        data = request.get_json(post)
+        post.content = data['content']
+        db.session.commit()
+        return jsonify({"success": True})
+    except Exception as e:
+        print(e)
+    return jsonify({"success": False})
+
+
+@app.after_request
+def headers(response):
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Content-Security-Policy"] = "script-src = 'unsafe-inline'"
+    response.headers["Access-Control-Allow-Oring"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "True"
+    return response
+
+with app.app_context():
+    db.create_all()
+app.run(debug=True)
+            </pre>
+         </section>
     </main>
    
 </body>
