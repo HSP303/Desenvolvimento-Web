@@ -1,0 +1,21 @@
+div {
+    margin: 20px;
+}
+
+div.cont1 {
+    background-color: rgb(154, 173, 244);
+}
+
+div.cont2 {
+    background-color: gray;
+}
+
+div.cont3 {
+    background-color: gray;
+}
+
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
