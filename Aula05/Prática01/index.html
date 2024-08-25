@@ -7,17 +7,37 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="number" name="pri_numero" id="pri_numero">
-    <input type="number" name="sec_numero" id="sec_numero">
-    <br>
-    <button onclick="Soma()">Soma</button>
-    <button onclick="Subtrai()">Subtrai</button>
-    <button onclick="Multiplica()">Multiplica</button>
-    <button onclick="Divide()">Divide</button>
-    <br>
-    <output id="resultado">Resultado</output>
+    <div class="calculadora">
+        <h1>Calculadora</h1>
+        <ul>
+            <li>
+                <label for="pri_numero">Primeiro Valor:</label>
+                <input type="number" name="pri_numero" id="pri_numero">
+            </li>
+            
+            <li>
+                <label for="sec_numero">Secundo Valor:</label>
+                <input type="number" name="sec_numero" id="sec_numero">
+            </li>
+            
+            <li>
+                <button onclick="Soma()">Soma</button>
+                <button onclick="Subtrai()">Subtrai</button>
+                <button onclick="Multiplica()">Multiplica</button>
+                <button onclick="Divide()">Divide</button>
+            </li>
+            
+            <li>
+                <output id="resultado">Resultado</output>
+            </li>
+            
+        </ul>
+        
+    </div>
+    
     
 <script src="script.js"></script>
+
 </body>
 
 </html>
