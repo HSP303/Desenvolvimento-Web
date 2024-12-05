@@ -1,0 +1,4 @@
+codigo;nome;sobrenome;idade;endereco
+1;"Harry";"Potter";26;"Rua das Couve, 25"
+2;"Drako";"Malfoy";24;"Rua das Alfazemas, 1542"
+3;"Rony";"Wisley";26;"Beco Diagonal, 223"
